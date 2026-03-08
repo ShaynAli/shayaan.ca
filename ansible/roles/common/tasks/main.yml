@@ -30,7 +30,7 @@
     state: directory
     owner: ubuntu
     group: ubuntu
-    mode: 0755
+    mode: '0755'
   become: true
 
 - name: Ensure site directory exists
@@ -39,14 +39,14 @@
     state: directory
     owner: ubuntu
     group: ubuntu
-    mode: 0755
+    mode: '0755'
   become: true
 
 - name: Create site nginx configuration
   template:
     src: '{{ templates_root }}/site_nginx_http.tpl'
     dest: /etc/nginx/sites-available/{{ nginx_site }}
-    mode: 644
+    mode: '0644'
     group: root
     owner: root
   become: true
@@ -70,4 +70,4 @@
     dest: '/home/ubuntu/.ssh/{{ deploy_key_file }}'
     owner: ubuntu
     group: ubuntu
-    mode: 0600
+    mode: '0600'

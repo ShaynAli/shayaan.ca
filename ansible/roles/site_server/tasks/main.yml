@@ -18,7 +18,7 @@
   template:
     src: '{{ templates_root }}/.env.production.tpl'
     dest: '{{ source_root }}/site_frontend/.env.production'
-    mode: 644
+    mode: '0644'
 
 - name: Deploy systemd service file
   template:
@@ -26,14 +26,14 @@
     dest: /etc/systemd/system/site_app.service
     owner: root
     group: root
-    mode: 644
+    mode: '0644'
   become: true
 
 - name: Update nginx configuration
   template:
     src: ../templates/nginx.conf.tpl
     dest: /etc/nginx/nginx.conf
-    mode: 644
+    mode: '0644'
     group: root
     owner: root
     force: '{{ force_nginx_override }}'
@@ -43,7 +43,7 @@
   template:
     src: '{{ templates_root }}/{{ "site_nginx_ssl.tpl" if use_ssl else "site_nginx_http.tpl" }}'
     dest: /etc/nginx/sites-available/{{ nginx_site }}
-    mode: 644
+    mode: '0644'
     group: root
     owner: root
     force: '{{ force_nginx_override }}'
