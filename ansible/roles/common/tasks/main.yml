@@ -1,0 +1,73 @@
+---
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  become: true
+
+- name: Install system dependencies
+  apt:
+    name:
+      - python3-pip
+      - python3-venv
+      - nginx
+      - git
+      - virtualenv
+      - fail2ban
+    state: present
+  become: true
+
+- name: Ensure fail2ban is started and enabled
+  systemd:
+    name: fail2ban
+    state: started
+    enabled: yes
+  become: true
+
+- name: Ensure /var/www exists
+  file:
+    path: /var/www
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: 0755
+  become: true
+
+- name: Ensure site directory exists
+  file:
+    path: /var/www/{{ site_name }}
+    state: directory
+    owner: ubuntu
+    group: ubuntu
+    mode: 0755
+  become: true
+
+- name: Create site nginx configuration
+  template:
+    src: '{{ templates_root }}/site_nginx_http.tpl'
+    dest: /etc/nginx/sites-available/{{ nginx_site }}
+    mode: 644
+    group: root
+    owner: root
+  become: true
+
+- name: Ensure site is enabled in nginx
+  file:
+    src: '/etc/nginx/sites-available/{{ nginx_site }}'
+    dest: '/etc/nginx/sites-enabled/{{ nginx_site }}'
+    state: link
+  become: true
+
+- name: Remove default nginx site
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  become: true
+
+- name: Copy deploy key to server
+  copy:
+    src: '~/.ssh/{{ deploy_key_file }}'
+    dest: '/home/ubuntu/.ssh/{{ deploy_key_file }}'
+    owner: ubuntu
+    group: ubuntu
+    mode: 0600

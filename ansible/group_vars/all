@@ -1,0 +1,21 @@
+---
+
+repository: git@github.com:ShaynAli/shayaan.ca.git
+deploy_version: main
+site_name: shayaan.ca
+nginx_site: '{{ site_name }}'
+
+source_root: '/var/www/{{ site_name }}'
+static_content_root: '{{ source_root }}/site_frontend/dist'
+backend_root: '{{ source_root }}/site_backend'
+# To find templates on the control server.
+templates_root: '~/{{ site_name }}/ansible/templates'
+
+deploy_key_file: github-site-deploy-id_ed25519
+use_ssl: true
+force_nginx_override: false
+
+app_server_port: 5000
+gunicorn_workers_per_core: 2
+
+aws_region: us-east-1

@@ -1,0 +1,12 @@
+# Editor
+.idea/
+*.code-workspace
+.vscode/
+
+# Dependency artifacts
+venv/
+__pycache__/
+**.pyc
+
+# Used to maintain directory structure
+!**.gitkeep

@@ -1,0 +1,67 @@
+---
+
+- name: Update repository
+  git:
+    repo: '{{ repository }}'
+    key_file: '~/.ssh/{{ deploy_key_file }}'
+    dest: '{{ source_root }}'
+    version: '{{ deploy_version }}'
+    accept_hostkey: yes
+
+- name: Install backend requirements
+  pip:
+    chdir: '{{ backend_root }}'
+    virtualenv: '{{ backend_root }}/venv'
+    requirements: '{{ backend_root }}/requirements.txt'
+
+- name: Template frontend environment file
+  template:
+    src: '{{ templates_root }}/.env.production.tpl'
+    dest: '{{ source_root }}/site_frontend/.env.production'
+    mode: 644
+
+- name: Deploy systemd service file
+  template:
+    src: '{{ templates_root }}/site_app.service'
+    dest: /etc/systemd/system/site_app.service
+    owner: root
+    group: root
+    mode: 644
+  become: true
+
+- name: Update nginx configuration
+  template:
+    src: ../templates/nginx.conf.tpl
+    dest: /etc/nginx/nginx.conf
+    mode: 644
+    group: root
+    owner: root
+    force: '{{ force_nginx_override }}'
+  become: true
+
+- name: Update site nginx configuration
+  template:
+    src: '{{ templates_root }}/{{ "site_nginx_ssl.tpl" if use_ssl else "site_nginx_http.tpl" }}'
+    dest: /etc/nginx/sites-available/{{ nginx_site }}
+    mode: 644
+    group: root
+    owner: root
+    force: '{{ force_nginx_override }}'
+  become: true
+
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
+  become: true
+
+- name: Restart site_app
+  systemd:
+    name: site_app
+    state: restarted
+  become: true
+
+- name: Restart nginx
+  service:
+    name: nginx
+    state: reloaded
+  become: true

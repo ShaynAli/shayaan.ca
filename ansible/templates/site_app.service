@@ -1,0 +1,33 @@
+[Unit]
+Description=Gunicorn instance for site backend
+After=network.target
+
+[Service]
+Environment="PATH={{ backend_root }}/venv/bin"
+Environment="PYTHONPATH={{ backend_root }}"
+Environment="PYTHONUNBUFFERED=1"
+Environment="APP_SERVER_PORT={{ app_server_port }}"
+Environment="WORKERS_PER_CORE={{ gunicorn_workers_per_core }}"
+Environment="AWS_REGION={{ aws_region }}"
+User=ubuntu
+WorkingDirectory={{ source_root }}
+ExecStart={{ backend_root }}/venv/bin/gunicorn \
+  --config {{ backend_root }}/gunicorn_configuration.py \
+  --chdir {{ backend_root }} \
+  site_app:site_app
+
+# Restart settings
+Restart=on-failure
+RestartSec=5
+KillMode=mixed
+TimeoutStopSec=5
+
+# File descriptor limit
+LimitNOFILE=65536
+
+# Security settings
+PrivateTmp=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

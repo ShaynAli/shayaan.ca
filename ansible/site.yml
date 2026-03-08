@@ -1,0 +1,17 @@
+---
+
+# TODO Break up into handlers, so Nginx, daemons, SSL, etc. can be handled independently.
+# TODO Set up either AWS CLI (regions, access keys, ...) or an IAM role.
+# TODO Set up crontab for certbot.
+
+- name: Apply common configuration
+  hosts: all
+  remote_user: ubuntu
+  roles: [common]
+
+- name: Update and deploy servers
+  hosts: servers
+  remote_user: ubuntu
+  roles: [empty-site]
+
+# Run on Linux/WSL with: ansible-playbook -i hosts site.yml

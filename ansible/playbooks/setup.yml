@@ -1,0 +1,7 @@
+---
+
+- name: Set up servers
+  hosts: servers
+  remote_user: ubuntu
+  roles:
+    - common
