@@ -1,5 +1,12 @@
 @import 'tailwindcss';
 
+@font-face {
+  font-family: 'Atyan Dsegh';
+  src: url('./assets/fonts/Atyan_Dsegh_regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
   text-rendering: optimizeLegibility;
@@ -7,22 +14,10 @@
   -moz-osx-font-smoothing: grayscale;
 
   /* Brand color definitions */
-  --brand-blue: #4a8fff;
-  --brand-blue-bright: #5fa8ff;
-  --brand-blue-muted: #3d7acc;
-  --brand-blue-code: #64b5f6;
-  
-  --brand-green: #10b981;
-  
-  --brand-black: #0a0e1a;
-  --brand-blacker: #050810;
-  --brand-gray: #151b28;
-  --brand-gray-light: #1f2937;
-  --brand-gray-lighter: #374155;
-  
-  --brand-white: #e8eaed;
-  --brand-white-muted: #9ca3af;
-  --brand-white-dimmed: #6b7280;
+  --brand-orange: #FF6200;
+
+  --brand-black: #000000;
+  --brand-white: #FFFFFF;
 }
 
 @layer base {
@@ -33,34 +28,21 @@
     background-color: var(--brand-black);
     color: var(--brand-white);
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Atyan Dsegh', sans-serif;
+    color: var(--brand-white);
+    margin: 0;
+    font-size: 96px;
+    /* TODO Figure out sizing. */
+  }
 }
 
 @layer utilities {
   /* Background colors */
-  .bg-background { background-color: var(--brand-black); }
-  .bg-surface { background-color: var(--brand-gray); }
-  .bg-surface-elevated { background-color: var(--brand-gray-light); }
-  
-  /* Text colors */
-  .text-text { color: var(--brand-white); }
-  .text-text-muted { color: var(--brand-white-muted); }
-  .text-text-dimmed { color: var(--brand-white-dimmed); }
-  
-  /* Accent colors */
-  .text-accent { color: var(--brand-blue); }
-  .text-accent-code { color: var(--brand-blue-code); }
-  .text-success { color: var(--brand-green); }
-  .bg-accent { background-color: var(--brand-blue); }
-  .bg-accent-hover { background-color: var(--brand-blue-bright); }
-  
-  /* Borders */
-  .border-border { border-color: var(--brand-gray-light); }
-  .border-border-subtle { border-color: var(--brand-gray-lighter); }
-  .border-accent { border-color: var(--brand-blue); }
-  
-  /* Hover states */
-  .hover\:bg-accent-hover:hover { background-color: var(--brand-blue-bright); }
-  .hover\:text-text:hover { color: var(--brand-white); }
-  .hover\:text-accent:hover { color: var(--brand-blue); }
-  .hover\:text-accent-hover:hover { color: var(--brand-blue-bright); }
+  .bg-black { background-color: var(--brand-black); }
+  .bg-orange { background-color: var(--brand-orange); }
+  .text-title {  font-family: 'Atyan Dsegh', sans-serif; font-size: 32px; }
+  .text-black { color: var(--brand-black); }
+  .text-white { color: var(--brand-white); }
 }
