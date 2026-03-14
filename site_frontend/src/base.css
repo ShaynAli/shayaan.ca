@@ -13,9 +13,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* Brand color definitions */
   --brand-orange: #FF6200;
-
   --brand-black: #000000;
   --brand-white: #FFFFFF;
 }
@@ -29,20 +27,31 @@
     color: var(--brand-white);
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1 {
     font-family: 'Atyan Dsegh', sans-serif;
     color: var(--brand-white);
     margin: 0;
-    font-size: 96px;
-    /* TODO Figure out sizing. */
+    font-size: 128px;
+  }
+
+  h2, h3, h4, h5, h6 {
+    font-family: 'Atyan Dsegh', sans-serif;
+    color: var(--brand-white);
+    margin: 0;
+    font-size: 64px;
   }
 }
 
 @layer utilities {
-  /* Background colors */
   .bg-black { background-color: var(--brand-black); }
   .bg-orange { background-color: var(--brand-orange); }
+
   .text-title {  font-family: 'Atyan Dsegh', sans-serif; font-size: 32px; }
   .text-black { color: var(--brand-black); }
   .text-white { color: var(--brand-white); }
+  
+  .title-xl { font-size: 128px; }
+  .title-lg { font-size: 96px; }
+  .title-md { font-size: 64px; }
+  .title-sm { font-size: 32px; }
 }
