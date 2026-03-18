@@ -16,6 +16,9 @@
   --brand-orange: #FF6200;
   --brand-black: #000000;
   --brand-white: #FFFFFF;
+
+  /* TODO A dynamic, common margin based on width */
+  /* --inboard-margin: max(64px, 5vw); */
 }
 
 @layer base {
@@ -27,18 +30,23 @@
     color: var(--brand-white);
   }
 
-  h1 {
+  h1, h2, h3, h4, h5, h6 {
     font-family: 'Atyan Dsegh', sans-serif;
     color: var(--brand-white);
     margin: 0;
+    line-height: 1.0;
+  }
+
+  h1 {
     font-size: 128px;
   }
 
-  h2, h3, h4, h5, h6 {
-    font-family: 'Atyan Dsegh', sans-serif;
-    color: var(--brand-white);
-    margin: 0;
-    font-size: 64px;
+  h2 {
+    font-size: 96px;
+  }
+
+  h3, h4, h5, h6 {
+    font-size: 96px;
   }
 }
 
@@ -49,9 +57,22 @@
   .text-title {  font-family: 'Atyan Dsegh', sans-serif; font-size: 32px; }
   .text-black { color: var(--brand-black); }
   .text-white { color: var(--brand-white); }
-  
+
   .title-xl { font-size: 128px; }
   .title-lg { font-size: 96px; }
   .title-md { font-size: 64px; }
   .title-sm { font-size: 32px; }
+
+  .svg-section-divider {
+    display: block;
+    width: 100%;
+    height: auto;
+    scale: 1.05;
+    overflow: visible;
+    z-index: 10;
+  }
+
+  section :not(.svg-section-divider) {
+    z-index: 20;
+  }
 }

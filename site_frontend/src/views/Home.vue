@@ -29,105 +29,98 @@ import lakeTreeline from '@/assets/images/lake-treeline.svg'
           class='text-white'
         >Free Audit</router-link>
       </div>
-      <!-- TODO Overdraw the SVGs to avoid gaps at the ends and between sections. -->
       <img
         :src='heroMountain'
-        class='w-full bg-orange'
+        class='svg-section-divider origin-right'
       >
     </section>
-    <img
-      :src='heroLake'
-      class='w-full bg-orange pb-10'
-    >
 
     <section class='bg-orange text-white flex flex-col'>
-      <div class='py-16 px-32'>
+      <img
+        :src='heroLake'
+        class='svg-section-divider origin-right mb-[5%]'
+      >
+      <div class='py-16 px-64 flex flex-col gap-12'>
         <h2 class='title-lg'>Made for Fraser Valley Businesses</h2>
         <h2 class='title-lg'>Lightning-fast and visually unique</h2>
         <h2 class='title-lg'>Only pay if you love it</h2>
       </div>
       <img
         :src='lakeTreeline'
-        class='w-full -mt-30'
+        class='svg-section-divider origin-right -mt-[5%]'
       >
     </section>
 
     <!-- Portfolio Section -->
     <!-- TODO Hook up links. -->
     <!-- TODO Animation, select state, etc. -->
-    <section class='text-white px-16 py-12'>
-      <h2>Websites & Brands I Have Built</h2>
-
-      <article class='bg-orange rounded-3xl p-8 my-8'>
-        <div class='flex gap-8'>
-          <div class='flex-1'>
-            <!-- Placeholder for screenshot -->
-            <div class='bg-gray-300 aspect-video'></div>
+    <section>
+      <div class='text-white px-64 py-12'>
+        <h2>Websites & Brands I Have Built</h2>
+        <article class='bg-orange rounded-3xl p-8 my-8'>
+          <div class='flex gap-8'>
+            <div class='flex-1'>
+              <!-- Placeholder for screenshot -->
+              <div class='bg-gray-300 aspect-video'></div>
+            </div>
+            <div class='flex-1'>
+              <h3>Wolfsburg Autoworks</h3>
+              <p>An auto shop in Abbotsford, BC that specializes in European vehicles.</p>
+              <router-link
+                to='#'
+                class='text-title'
+              >See Live</router-link>
+            </div>
           </div>
-          <div class='flex-1'>
-            <h3>Wolfsburg Autoworks</h3>
-            <p>An auto shop in Abbotsford, BC that specializes in European vehicles.</p>
-            <router-link
-              to='#'
-              class='text-title'
-            >See Live</router-link>
+        </article>
+        <article class='text-white rounded-lg p-8 my-8'>
+          <div class='flex gap-8'>
+            <div class='flex-1'>
+              <!-- Placeholder for screenshot -->
+              <div class='bg-gray-300 aspect-video'></div>
+            </div>
+            <div class='flex-1'>
+              <h3>The Barefoot PT</h3>
+              <p>A physiotherapist focused on restoring movement and reducing pain.</p>
+            </div>
           </div>
-        </div>
-      </article>
-
-      <article class='text-white rounded-lg p-8 my-8'>
-        <div class='flex gap-8'>
-          <div class='flex-1'>
-            <!-- Placeholder for screenshot -->
-            <div class='bg-gray-300 aspect-video'></div>
+        </article>
+        <article class='text-white p-8 my-8'>
+          <div class='flex gap-8'>
+            <div class='flex-1'>
+              <!-- Placeholder for screenshot -->
+              <div class='bg-gray-300 aspect-video'></div>
+            </div>
+            <div class='flex-1'>
+              <h3>The Reel McCoy</h3>
+              <p>A professional photographer who builds brand visuals and visualizations.</p>
+            </div>
           </div>
-          <div class='flex-1'>
-            <h3>The Barefoot PT</h3>
-            <p>A physiotherapist focused on restoring movement and reducing pain.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class='text-white p-8 my-8'>
-        <div class='flex gap-8'>
-          <div class='flex-1'>
-            <!-- Placeholder for screenshot -->
-            <div class='bg-gray-300 aspect-video'></div>
-          </div>
-          <div class='flex-1'>
-            <h3>The Reel McCoy</h3>
-            <p>A professional photographer who builds brand visuals and visualizations.</p>
-          </div>
-        </div>
-      </article>
+        </article>
+      </div>
+      <img
+        :src='railBridge'
+        class='svg-section-divider origin-right mt-[5%]'
+      >
     </section>
 
-    <img
-      :src='railBridge'
-      class='w-full bg-black -mb-40'
-    >
 
     <!-- Services Section -->
-    <section class='bg-orange text-white px-16 py-12'>
+    <section class='bg-orange text-white px-64 py-12'>
       <h2>Services I Offer</h2>
-
-      <article class='my-8'>
-        <div class='flex gap-4 items-start'>
-          <!-- Icon placeholder -->
-          <div class='w-16 h-16 bg-black'></div>
+      <div class='p-16 grid grid-cols-[324px_auto] gap-16'>
+        <article class='col-span-2 grid grid-cols-subgrid items-start'>
+          <div class='w-full h-full bg-black'></div>
           <div>
             <h3>Website design & development</h3>
             <p>
               I create a website that reflects your brand's professional identity and runs perfectly on every device.
             </p>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <article class='my-8'>
-        <div class='flex gap-4 items-start'>
-          <!-- Icon placeholder -->
-          <div class='w-16 h-16 bg-black'></div>
+        <article class='col-span-2 grid grid-cols-subgrid items-start'>
+          <div class='w-full h-full bg-black'></div>
           <div>
             <h3>Brand building & graphic design</h3>
             <p>
@@ -135,31 +128,40 @@ import lakeTreeline from '@/assets/images/lake-treeline.svg'
               marketing materials, and more.
             </p>
           </div>
-        </div>
-      </article>
+        </article>
 
-      <article class='my-8'>
-        <div class='flex gap-4 items-start'>
-          <!-- Icon placeholder -->
-          <div class='w-16 h-16 bg-black'></div>
+        <article class='col-span-2 grid grid-cols-subgrid items-start'>
+          <div class='w-full h-full bg-black'></div>
           <div>
             <h3>Advertisement & lead optimization</h3>
             <p>
               I create and test ads and strategies to find the ones that bring the most customers into your business.
             </p>
           </div>
-        </div>
-      </article>
+        </article>
+      </div>
     </section>
 
     <!-- CTA Section -->
+    <!-- TODO Hook this up -->
     <section class='bg-black text-white px-16 py-24 text-center'>
-      <router-link
-        to='/audit'
-        class='text-orange'
-      >
-        <h2>Get your free audit</h2>
-      </router-link>
+      <h2>Get your free audit</h2>
+      <form class='flex flex-col items-center'>
+        <input
+          type='tel'
+          placeholder='Phone number'
+          class='p-4 rounded-lg text-black bg-white w-full max-w-md mx-auto my-4'
+        >
+        <input
+          type='email'
+          placeholder='Email address'
+          class='p-4 rounded-lg text-black bg-white w-full max-w-md mx-auto my-4'
+        >
+        <button
+          type='submit'
+          class='bg-orange text-white px-8 py-4 rounded-lg mt-4 cursor-pointer text-title'
+        >Get Started</button>
+      </form>
     </section>
 
   </main>
