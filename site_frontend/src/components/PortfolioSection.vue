@@ -1,64 +1,62 @@
 <script setup>
 import railBridge from '@/assets/images/divider-rail-bridge.svg'
+import PortfolioItem from './PortfolioItem.vue'
 
 // TODO Compress these.
 import wolfsburg from '@/assets/images/portfolio-wolfsburg.png'
 import barefootpt from '@/assets/images/portfolio-barefoot.png'
 import mccoy from '@/assets/images/portfolio-mccoy.png'
+
+const portfolioItems = [
+  {
+    id: 'wolfsburg',
+    name: 'Wolfsburg Autoworks',
+    description: 'An auto shop in Abbotsford, BC that specializes in European vehicles.',
+    image: wolfsburg,
+    url: 'https://wolfsburg.nextsyte.com/',
+    desktopScreenshots: [wolfsburg, wolfsburg, wolfsburg, wolfsburg],
+    mobileScreenshots: [wolfsburg, wolfsburg, wolfsburg, wolfsburg]
+  },
+  {
+    id: 'barefoot',
+    name: 'The Barefoot PT',
+    description: 'A physiotherapist focused on restoring movement and reducing pain.',
+    image: barefootpt,
+    url: 'https://thebarefootpt.com/',
+    desktopScreenshots: [barefootpt, barefootpt, barefootpt, barefootpt],
+    mobileScreenshots: [barefootpt, barefootpt, barefootpt, barefootpt]
+  },
+  {
+    id: 'mccoy',
+    name: 'The Reel McCoy',
+    description: 'A professional photographer who builds brand visuals and visualizations.',
+    image: mccoy,
+    url: 'https://reel-mccoy.com/',
+    desktopScreenshots: [mccoy, mccoy, mccoy, mccoy],
+    mobileScreenshots: [mccoy, mccoy, mccoy, mccoy]
+  }
+]
 </script>
 
 <template>
   <!-- Portfolio Section -->
   <!-- TODO Hook up links. -->
-  <!-- TODO Animation, select state, etc. -->
-  <section>
-    <div class='text-white px-64 py-12'>
-      <h2>Websites & Brands I Have Built</h2>
-      <article>
-        <div class='website-screenshot'>
-          <img :src='wolfsburg'></img>
-        </div>
-        <div class='website-info'>
-          <h3>Wolfsburg Autoworks</h3>
-          <p>An auto shop in Abbotsford, BC that specializes in European vehicles.</p>
-          <a
-            href='https://wolfsburg.nextsyte.com/'
-            class='text-title'
-            target='_blank'
-            rel='noopener noreferrer'
-          >See Live</a>
-        </div>
-      </article>
-      <article>
-        <div class='website-screenshot'>
-          <img :src='barefootpt'></img>
-        </div>
-        <div class='website-info'>
-          <h3>The Barefoot PT</h3>
-          <p>A physiotherapist focused on restoring movement and reducing pain.</p>
-          <a
-            href='https://thebarefootpt.com/'
-            class='text-title'
-            target='_blank'
-            rel='noopener noreferrer'
-          >See Live</a>
-        </div>
-      </article>
-      <article>
-        <div class='website-screenshot'>
-          <img :src='mccoy'></img>
-        </div>
-        <div class='website-info'>
-          <h3>The Reel McCoy</h3>
-          <p>A professional photographer who builds brand visuals and visualizations.</p>
-          <a
-            href='https://reel-mccoy.com/'
-            class='text-title'
-            target='_blank'
-            rel='noopener noreferrer'
-          >See Live</a>
-        </div>
-      </article>
+  <section
+    id='portfolio'
+    class='text-white pt-24 portfolio-section'
+  >
+    <h2 class='py-24 text-center'>Websites & Brands I Have Built</h2>
+    <div class='portfolio-grid'>
+      <PortfolioItem
+        v-for='item in portfolioItems'
+        :key='item.id'
+        :name='item.name'
+        :description='item.description'
+        :image='item.image'
+        :url='item.url'
+        :desktop-screenshots='item.desktopScreenshots'
+        :mobile-screenshots='item.mobileScreenshots'
+      />
     </div>
     <img
       :src='railBridge'
@@ -68,69 +66,14 @@ import mccoy from '@/assets/images/portfolio-mccoy.png'
 </template>
 
 <style scoped>
-article {
-  display: flex;
-  gap: 48px;
-
-  padding: 64px;
-  margin: 32px 0;
-  color: var(--brand-white);
-  border-radius: 64px;
-
-  max-width: 1200px;
-
-  transition: all 0.3s ease-out;
-
-
-  .website-screenshot {
-    flex: 1;
-    height: 100%;
-    transition: flex 0.3s ease-out;
-
-    img {
-      object-fit: contain;
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
-    }
-  }
-
-  .website-info {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    flex: 3;
-    transition: flex 0.3s ease-out;
-
-
-    p {
-      font-size: var(--text-base);
-      color: var(--brand-white-body);
-    }
-
-    a {
-      display: none;
-    }
-  }
+.portfolio-section {
+  padding-left: var(--section-padding-x);
+  padding-right: var(--section-padding-x);
 }
 
-article:hover {
-  background-color: var(--brand-orange);
-  transform: scale(1.1);
-
-  .website-screenshot {
-    flex: 1;
-  }
-
-  .website-info {
-    flex: 1;
-
-    p {
-      color: var(--brand-white-body);
-    }
-
-    a {
-      display: block;
-    }
-  }
+.portfolio-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

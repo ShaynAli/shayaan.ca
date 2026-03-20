@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 import HeroSection from '@/components/HeroSection.vue'
+import SiteNav from '@/components/SiteNav.vue'
 import ValuePropsSection from '@/components/ValuePropsSection.vue'
 import PortfolioSection from '@/components/PortfolioSection.vue'
 import ServicesSection from '@/components/ServicesSection.vue'
@@ -13,6 +14,7 @@ const selected = ref(null);
 <template>
   <main>
     <HeroSection />
+    <SiteNav />
     <ValuePropsSection />
     <PortfolioSection />
     <ServicesSection />

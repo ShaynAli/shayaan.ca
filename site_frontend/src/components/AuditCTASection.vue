@@ -42,7 +42,10 @@ const submitForm = async () => {
 
 <template>
   <!-- CTA Section -->
-  <section class='bg-black text-white px-16 py-24 text-center'>
+  <section
+    id='audit'
+    class='bg-black text-white px-16 py-24 text-center'
+  >
     <h2>Get your free audit</h2>
     <form
       class='flex flex-col items-center'
