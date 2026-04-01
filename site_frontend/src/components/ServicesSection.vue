@@ -27,7 +27,7 @@ const servicesItems = [
   <!-- Services Section -->
   <section
     id='services'
-    class='bg-orange text-white py-24 services-section'
+    class='bg-orange text-white p-24 services-section flex flex-col items-center'
   >
     <h2 class='py-24 text-center'>Services I Offer</h2>
     <div class='services-grid'>
@@ -43,20 +43,12 @@ const servicesItems = [
 </template>
 
 <style scoped>
-.services-section {
-  padding-left: var(--section-padding-x);
-  padding-right: var(--section-padding-x);
-}
-
 .services-grid {
-  display: grid;
-  grid-template-columns: clamp(200px, 30%, 324px) auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* TODO Set dynamically. */
+  width: 1500px;
   gap: var(--article-gap);
-}
-
-@media (max-width: 768px) {
-  .services-grid {
-    grid-template-columns: 1fr;
-  }
 }
 </style>

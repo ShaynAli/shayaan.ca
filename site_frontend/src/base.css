@@ -116,8 +116,10 @@
     width: 100%;
     height: auto;
     scale: 1.05;
-    overflow: visible;
+    overflow: hidden;
     z-index: 10;
+    transform-origin: right;
+    pointer-events: none;
   }
 
   section :not(.svg-section-divider) {

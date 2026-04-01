@@ -55,7 +55,7 @@ onMounted(() => {
 <template>
   <article
     ref='article'
-    class='service-item col-span-2 grid grid-cols-subgrid items-start'
+    class='service-item'
   >
     <div
       ref='imageContainer'
@@ -84,14 +84,26 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.service-image {
+.service-item {
+  display: flex;
+  gap: var(--article-gap);
   width: 100%;
-  height: 100%;
+}
+
+.service-image {
+  flex: 0 0 clamp(200px, 30%, 324px);
+  width: clamp(200px, 30%, 324px);
+  /* TODO Set properly. */
 }
 
 img {
   width: 100%;
   height: auto;
+  /* TODO Set properly. */
+}
+
+.service-info {
+  flex: 1 1 auto;
 }
 
 .placeholder-svg {
@@ -107,10 +119,12 @@ img {
 
 @media (max-width: 768px) {
   .service-item {
-    grid-column: span 1;
-    display: flex;
     flex-direction: column;
-    gap: var(--article-gap);
+  }
+
+  .service-image {
+    flex: 1 1 auto;
+    width: 100%;
   }
 }
 </style>

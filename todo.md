@@ -1,0 +1,2 @@
+- Finish the service section
+- Fix horizontal overdrawing of some svg section dividers.

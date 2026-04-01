@@ -31,13 +31,13 @@ onMounted(() => {
     class='w-full h-screen bg-orange flex flex-col justify-end relative'
   >
     <h1 class='p-24 absolute top-0 left-0 min-w-176'>
-      A Website<br />
-      That Brings
+      Websites / Ads / Systems<br />
+      That Bring
       <br class='block xl:hidden' />
       You <br class='hidden xl:block 2xl:hidden' />More
       <br class='block xl:hidden' />Customers
     </h1>
-    <div class='svg-section-divider absolute inset-0 overflow-hidden pointer-events-none'>
+    <div class='svg-section-divider absolute inset-0'>
       <img
         ref='mountainBg'
         :src='heroMountainBg'

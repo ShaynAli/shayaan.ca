@@ -43,7 +43,7 @@ const portfolioItems = [
   <!-- TODO Hook up links. -->
   <section
     id='portfolio'
-    class='text-white pt-24 portfolio-section'
+    class='text-white pt-24 portfolio-section w-full'
   >
     <h2 class='py-24 text-center'>Websites & Brands I Have Built</h2>
     <div class='portfolio-grid'>
@@ -60,17 +60,12 @@ const portfolioItems = [
     </div>
     <img
       :src='railBridge'
-      class='svg-section-divider origin-right mt-[5%]'
+      class='svg-section-divider mt-[5%]'
     >
   </section>
 </template>
 
 <style scoped>
-.portfolio-section {
-  padding-left: var(--section-padding-x);
-  padding-right: var(--section-padding-x);
-}
-
 .portfolio-grid {
   display: flex;
   flex-direction: column;
