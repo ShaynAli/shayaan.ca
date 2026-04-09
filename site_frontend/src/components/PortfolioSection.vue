@@ -46,7 +46,7 @@ const portfolioItems = [
     class='text-white pt-24 portfolio-section w-full'
   >
     <h2 class='py-24 text-center'>Websites & Brands I Have Built</h2>
-    <div class='portfolio-grid'>
+    <div class='flex flex-col items-center'>
       <PortfolioItem
         v-for='item in portfolioItems'
         :key='item.id'
@@ -64,11 +64,3 @@ const portfolioItems = [
     >
   </section>
 </template>
-
-<style scoped>
-.portfolio-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-</style>

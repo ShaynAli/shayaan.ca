@@ -1,6 +1,8 @@
 <script setup>
-import { ref, onMounted, computed, watch, nextTick } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import { gsap } from 'gsap'
+import PortfolioScreenshotGrid from './PortfolioScreenshotGrid.vue'
+import PortfolioModal from './PortfolioModal.vue'
 
 const props = defineProps({
   name: String,
@@ -22,20 +24,8 @@ const screenshot = ref(null)
 const img = ref(null)
 const actionButtons = ref(null)
 const isModalOpen = ref(false)
-const selectedScreenshot = ref(null)
-const isMobileView = ref(false)
-const gridItems = ref([])
 const hasHover = ref(true)
 const isAnimated = ref(false)
-
-const displayScreenshots = computed(() => {
-  const screenshots = isMobileView.value ? props.mobileScreenshots : props.desktopScreenshots
-
-  if (screenshots.length > 0) {
-    return screenshots.slice(0, 4)
-  }
-  return Array(4).fill(props.image)
-})
 
 const stackScreenshot1 = computed(() => {
   const screenshots = props.desktopScreenshots
@@ -49,47 +39,7 @@ const stackScreenshot2 = computed(() => {
 
 const openModal = () => {
   isModalOpen.value = true
-  selectedScreenshot.value = null
 }
-
-const closeModal = () => {
-  isModalOpen.value = false
-  selectedScreenshot.value = null
-  isMobileView.value = false
-}
-
-const selectScreenshot = (index) => {
-  selectedScreenshot.value = index
-}
-
-const toggleMobileView = () => {
-  isMobileView.value = !isMobileView.value
-}
-
-watch(isModalOpen, async (newVal) => {
-  if (newVal) {
-    await nextTick()
-    if (gridItems.value.length === 4) {
-      gsap.fromTo(gridItems.value,
-        {
-          scale: 0,
-          opacity: 0,
-          x: 0,
-          y: 0
-        },
-        {
-          scale: 1,
-          opacity: 1,
-          x: 0,
-          y: 0,
-          duration: 0.5,
-          stagger: 0.1,
-          ease: 'back.out(1.7)'
-        }
-      )
-    }
-  }
-})
 
 onMounted(() => {
   if (!article.value) return
@@ -198,56 +148,14 @@ onMounted(() => {
     </div>
   </article>
 
-  <div
-    v-if='isModalOpen'
-    class='modal-overlay'
-    @click.self='closeModal'
-  >
-    <div class='modal-controls'>
-      <button
-        @click.stop='toggleMobileView'
-        class='aspect-toggle'
-      >
-        {{ isMobileView ? 'Desktop' : 'Mobile' }} View
-      </button>
-      <button
-        @click='closeModal'
-        class='close-button'
-      >×</button>
-    </div>
-
-    <div
-      v-if='selectedScreenshot === null'
-      class='screenshot-grid'
-    >
-      <div
-        v-for='(shot, index) in displayScreenshots'
-        :key='index'
-        :ref='el => { if (el) gridItems[index] = el }'
-        class='grid-item'
-        @click='selectScreenshot(index)'
-      >
-        <img
-          :src='shot'
-          :alt='`${name} screenshot ${index + 1}`'
-          :class='{ "mobile-aspect": isMobileView }'
-        />
-      </div>
-    </div>
-
-    <div
-      v-else
-      class='solo-view'
-      @click='selectedScreenshot = null'
-    >
-      <img
-        :src='displayScreenshots[selectedScreenshot]'
-        :alt='`${name} screenshot ${selectedScreenshot + 1}`'
-        :class='{ "mobile-aspect": isMobileView }'
-        class='solo-image'
-      />
-    </div>
-  </div>
+  <PortfolioModal
+    :is-open='isModalOpen'
+    :name='name'
+    :desktop-screenshots='desktopScreenshots'
+    :mobile-screenshots='mobileScreenshots'
+    :fallback-image='image'
+    @close='isModalOpen = false'
+  />
 </template>
 
 <style scoped>
@@ -341,121 +249,6 @@ article {
         cursor: pointer;
         padding: 0;
       }
-    }
-  }
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.95);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal-controls {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 32px;
-  align-items: center;
-  position: absolute;
-  top: 32px;
-  right: 32px;
-}
-
-.aspect-toggle {
-  background-color: var(--brand-white);
-  color: var(--brand-black);
-  border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: var(--text-base);
-  font-family: inherit;
-
-  &:hover {
-    background-color: var(--brand-orange);
-    color: var(--brand-white);
-  }
-}
-
-.close-button {
-  background: none;
-  border: none;
-  font-size: 48px;
-  cursor: pointer;
-  color: var(--brand-white);
-  line-height: 1;
-  padding: 0;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &:hover {
-    color: var(--brand-orange);
-  }
-}
-
-.screenshot-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 32px;
-  padding: 64px;
-  max-width: 1400px;
-  max-height: calc(100vh - 128px);
-
-  .grid-item {
-    cursor: pointer;
-    transition: transform 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &:hover {
-      transform: scale(1.05);
-    }
-
-    img {
-      width: 100%;
-      height: auto;
-      max-height: calc((100vh - 200px) / 2);
-      border-radius: 8px;
-      aspect-ratio: 4 / 3;
-      object-fit: contain;
-      display: block;
-
-      &.mobile-aspect {
-        aspect-ratio: 9 / 16;
-        max-height: calc((100vh - 200px) / 2);
-      }
-    }
-  }
-}
-
-.solo-view {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-
-  .solo-image {
-    max-width: 90%;
-    max-height: 80vh;
-    border-radius: 8px;
-    object-fit: contain;
-    aspect-ratio: 4 / 3;
-
-    &.mobile-aspect {
-      aspect-ratio: 9 / 16;
-      max-height: 85vh;
     }
   }
 }

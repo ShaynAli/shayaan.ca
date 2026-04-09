@@ -77,8 +77,8 @@ onMounted(() => {
       ref='info'
       class='service-info'
     >
-      <h3>{{ name }}</h3>
-      <p class='text-white-body'>{{ description }}</p>
+      <h3 class='text-balance'>{{ name }}</h3>
+      <p class='text-white-body text-pretty'>{{ description }}</p>
     </div>
   </article>
 </template>
@@ -88,6 +88,11 @@ onMounted(() => {
   display: flex;
   gap: var(--article-gap);
   width: 100%;
+
+  padding: var(--article-padding);
+  margin: var(--article-margin-y) 0;
+  border-radius: 48px;
+  max-width: 1200px;
 }
 
 .service-image {

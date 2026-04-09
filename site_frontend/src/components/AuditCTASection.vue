@@ -49,7 +49,7 @@ const submitForm = async () => {
   <!-- CTA Section -->
   <section
     id='audit'
-    class='bg-black text-white px-16 py-24 text-center'
+    class='bg-black text-white px-16 py-24 gap-12 flex flex-col text-center'
   >
     <h2>Get your free audit / Get in touch</h2>
     <form
